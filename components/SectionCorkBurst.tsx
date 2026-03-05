@@ -58,7 +58,6 @@ export default function SectionCorkBurst() {
     const firedAt = new WeakMap<HTMLElement, number>();
     const inViewState = new WeakMap<HTMLElement, boolean>();
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    const maxActive = 3;
     lastScrollYRef.current = window.scrollY;
 
     const cullTimer = window.setInterval(() => {
@@ -154,7 +153,8 @@ export default function SectionCorkBurst() {
             });
           }
 
-          setCorks((prev) => [...prev, ...spawned].slice(-maxActive));
+          // Substitui sempre pelo lote atual: exatamente 3 rolhas por seção.
+          setCorks(spawned);
         });
       },
       {
@@ -176,7 +176,7 @@ export default function SectionCorkBurst() {
 
   return (
     <div ref={layerRef} className="absolute inset-0 z-[6] pointer-events-none overflow-hidden" aria-hidden="true">
-      {corks.map((v) => (
+      {corks.slice(0, 3).map((v) => (
         <motion.div
           key={v.id}
           className="absolute will-change-transform"
