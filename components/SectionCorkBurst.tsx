@@ -203,7 +203,7 @@ export default function SectionCorkBurst() {
           }}
         >
           <Image
-            src="/rolha-bravino-clean.png"
+            src="/rolha-bravino-clean-v2.png"
             alt=""
             aria-hidden="true"
             width={3248}
