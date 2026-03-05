@@ -111,10 +111,10 @@ export default function SectionCorkBurst() {
               scale: rand(0.92, isMobile ? 1.12 : 1.26),
               duration,
               delay: 0.03 + i * 0.14,
-              rotateXFrom: rand(-14, 8),
-              rotateXTo: rand(24, 56),
-              rotateYFrom: rand(-12, 12),
-              rotateYTo: rand(-60, 60),
+              rotateXFrom: 0,
+              rotateXTo: 0,
+              rotateYFrom: 0,
+              rotateYTo: 0,
               rotateZFrom: rand(-8, 8),
               rotateZTo: zSpinDelta,
               width: isMobile ? 104 : 144,
@@ -133,10 +133,10 @@ export default function SectionCorkBurst() {
               scale: rand(0.92, isMobile ? 1.12 : 1.26),
               duration,
               delay: 0.06 + i * 0.14,
-              rotateXFrom: rand(-14, 8),
-              rotateXTo: rand(24, 56),
-              rotateYFrom: rand(-12, 12),
-              rotateYTo: rand(-60, 60),
+              rotateXFrom: 0,
+              rotateXTo: 0,
+              rotateYFrom: 0,
+              rotateYTo: 0,
               rotateZFrom: rand(-8, 8),
               rotateZTo: zSpinDelta,
               width: isMobile ? 104 : 144,
@@ -167,7 +167,7 @@ export default function SectionCorkBurst() {
         <motion.div
           key={v.id}
           className="absolute will-change-transform"
-          style={{ left: 0, top: 0, width: v.width, transformStyle: 'preserve-3d' }}
+          style={{ left: 0, top: 0, width: v.width }}
           initial={{
             x: v.x,
             y: v.y,
@@ -200,16 +200,13 @@ export default function SectionCorkBurst() {
           }}
         >
           <Image
-            src="/rolha-bravino-3d-uhd.webp"
+            src="/rolha-bravino-clean.png"
             alt=""
             aria-hidden="true"
             width={3248}
             height={4600}
             loading="lazy"
             className="h-auto w-full select-none"
-            style={{
-              filter: 'contrast(1.14) brightness(1.05) saturate(1.04)',
-            }}
           />
         </motion.div>
       ))}
