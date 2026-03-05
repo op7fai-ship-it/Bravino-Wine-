@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-serif: var(--font-playfair), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  --color-bravino-red: #B31C24;
+  --color-bravino-peach: #F5C6A5;
+  --color-bravino-cream: #FFFDF5;
+  --color-bravino-black: #0D0D0D;
+}
