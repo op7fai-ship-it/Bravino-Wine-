@@ -53,7 +53,7 @@ export default function AcolhimentoSection() {
           <div className="pointer-events-none absolute -right-28 top-10 h-[28rem] w-[28rem] rounded-full bg-bravino-peach/10" aria-hidden="true" />
           <div className="pointer-events-none absolute right-24 top-56 h-48 w-48 rounded-full bg-bravino-peach/10" aria-hidden="true" />
 
-          <div className="relative mx-auto flex h-full w-full max-w-2xl flex-col pt-[8.6rem] lg:pt-[10.2rem]">
+          <div className="relative mx-auto flex h-full w-full max-w-2xl flex-col pt-[7.6rem] lg:pt-[7.6rem]">
             <p className="font-serif text-3xl italic leading-[1.2] text-bravino-black lg:text-5xl">
               Confraternização, acolhimento e experiências memoráveis.
             </p>
