@@ -56,8 +56,9 @@ export default function SectionCorkBurst() {
     sections.forEach((s, i) => sectionIndex.set(s, i));
 
     const firedAt = new WeakMap<HTMLElement, number>();
+    const inViewState = new WeakMap<HTMLElement, boolean>();
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    const maxActive = isMobile ? 6 : 15;
+    const maxActive = 3;
     lastScrollYRef.current = window.scrollY;
 
     const cullTimer = window.setInterval(() => {
@@ -76,9 +77,18 @@ export default function SectionCorkBurst() {
         const wrapperRect = wrapper.getBoundingClientRect();
 
         entries.forEach((entry) => {
-          if (!entry.isIntersecting || !isScrollingDownRef.current) return;
-
           const target = entry.target as HTMLElement;
+          if (!entry.isIntersecting) {
+            inViewState.set(target, false);
+            return;
+          }
+
+          const wasInView = inViewState.get(target) ?? false;
+          if (wasInView) return;
+          inViewState.set(target, true);
+
+          if (!isScrollingDownRef.current) return;
+
           const now = performance.now();
           const last = firedAt.get(target) ?? 0;
           if (now - last < 900) return;
