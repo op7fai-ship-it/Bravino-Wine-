@@ -2,6 +2,7 @@
 
 import { MapPin } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'motion/react';
+import Image from 'next/image';
 import { useRef } from 'react';
 
 function AyrtonImage() {
@@ -19,8 +20,17 @@ function AyrtonImage() {
     >
       <motion.div
         style={{ y }}
-        className="absolute inset-0 scale-110 bg-[radial-gradient(circle_at_24%_22%,rgba(255,253,245,0.8),transparent_45%),linear-gradient(150deg,rgba(245,198,165,0.55),rgba(179,28,36,0.2)_46%,rgba(13,13,13,0.7))]"
-      />
+        className="absolute inset-0 scale-110"
+      >
+        <Image
+          src="/ayrton-senna.png"
+          alt="Unidade Bravino Ayrton Senna"
+          fill
+          className="object-cover"
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          priority={false}
+        />
+      </motion.div>
       <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(13,13,13,0.58),rgba(13,13,13,0.14))]" />
 
       <div className="absolute bottom-0 left-0 w-full p-6 lg:p-8">
@@ -47,8 +57,17 @@ function SantanaImage() {
     >
       <motion.div
         style={{ y }}
-        className="absolute inset-0 scale-110 bg-[radial-gradient(circle_at_72%_20%,rgba(255,253,245,0.85),transparent_43%),linear-gradient(152deg,rgba(245,198,165,0.72),rgba(179,28,36,0.2)_48%,rgba(13,13,13,0.65))]"
-      />
+        className="absolute inset-0 scale-110"
+      >
+        <Image
+          src="/santana.jpg"
+          alt="Unidade Bravino Santana"
+          fill
+          className="object-cover"
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          priority={false}
+        />
+      </motion.div>
       <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(13,13,13,0.52),rgba(13,13,13,0.08))]" />
 
       <div className="absolute bottom-0 left-0 w-full p-6 lg:p-8">

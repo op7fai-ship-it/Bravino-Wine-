@@ -39,6 +39,8 @@ function rightX(index: number, wrapperWidth: number, isMobile: boolean) {
 export default function SectionCorkBurst() {
   const layerRef = useRef<HTMLDivElement | null>(null);
   const [corks, setCorks] = useState<BurstCork[]>([]);
+  const lastScrollYRef = useRef(0);
+  const isScrollingDownRef = useRef(false);
 
   useEffect(() => {
     const layer = layerRef.current;
@@ -54,34 +56,32 @@ export default function SectionCorkBurst() {
     sections.forEach((s, i) => sectionIndex.set(s, i));
 
     const firedAt = new WeakMap<HTMLElement, number>();
-    const previousTop = new WeakMap<HTMLElement, number>();
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
     const maxActive = isMobile ? 6 : 15;
+    lastScrollYRef.current = window.scrollY;
 
     const cullTimer = window.setInterval(() => {
       const now = performance.now();
       setCorks((prev) => prev.filter((v) => v.expiresAt > now));
     }, 250);
 
+    const onScroll = () => {
+      const current = window.scrollY;
+      isScrollingDownRef.current = current > lastScrollYRef.current + 0.5;
+      lastScrollYRef.current = current;
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         const wrapperRect = wrapper.getBoundingClientRect();
 
         entries.forEach((entry) => {
-          if (!entry.isIntersecting || entry.intersectionRatio < 0.1) return;
+          if (!entry.isIntersecting || !isScrollingDownRef.current) return;
 
           const target = entry.target as HTMLElement;
-          const currentTop = entry.boundingClientRect.top;
-          const prevTop = previousTop.get(target);
-          previousTop.set(target, currentTop);
-
-          // Dispara apenas quando a seção sobe na viewport (usuário descendo).
-          const isMovingDownPage = prevTop === undefined ? true : currentTop < prevTop - 0.5;
-          if (!isMovingDownPage) return;
-
           const now = performance.now();
           const last = firedAt.get(target) ?? 0;
-          if (now - last < 1400) return;
+          if (now - last < 900) return;
           firedAt.set(target, now);
 
           const idx = sectionIndex.get(target) ?? 0;
@@ -148,15 +148,18 @@ export default function SectionCorkBurst() {
         });
       },
       {
-        threshold: [0.1],
+        threshold: 0,
+        rootMargin: '0px 0px -8% 0px',
         root: null,
       }
     );
 
     sections.forEach((section) => observer.observe(section));
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     return () => {
       observer.disconnect();
+      window.removeEventListener('scroll', onScroll);
       window.clearInterval(cullTimer);
     };
   }, []);
